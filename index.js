@@ -7,7 +7,11 @@ const app = express();
 
 connectDB();
 app.use(express.json());
-
+app.use(
+  cors({
+    origin: "*",
+  })
+); 
 app.post("/createProduct", async (req, res) => {
     
     try {
@@ -66,6 +70,18 @@ app.delete("/deleteProduct/:id", async (req, res) => {
         res.status(500).json(error);
   }
 });
+
+app.delete("/deleteAllProducts", async (req, res) => {
+    try {
+      await Product.deleteMany({});
+  
+      res.status(200).json({
+        success: "deleted all products",
+      });
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  });
 
 app.listen(8000, () => {
   console.log("server is running on port 8000");
