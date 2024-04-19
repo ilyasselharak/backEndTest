@@ -34,6 +34,20 @@ app.get("/getProduct/:id", async (req, res) => {
         res.status(500).json(error);
   }
 });
+app.get("/getProducts", async (req, res) => {
+  try {
+      const { name } = req.query;
+      
+      const queryObject = {};
+      if (name) queryObject.name = { $regex: name, $options: 'i' };
+
+      console.log(queryObject);
+  const products = await Product.find(queryObject);
+  res.status(200).json(products);
+} catch (error) {
+  res.status(500).json(error);
+}
+});
 
 app.get("/getProducts", async (req, res) => {
     try {
