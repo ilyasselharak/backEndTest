@@ -49,7 +49,7 @@ app.get("/getProducts", async (req, res) => {
 }
 });
 
-app.get("/getProducts", async (req, res) => {
+app.get("/getAllProducts", async (req, res) => {
     try {
         const products = await Product.find();
         console.log(products);
