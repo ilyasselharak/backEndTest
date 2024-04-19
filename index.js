@@ -1,7 +1,7 @@
 const express = require("express");
 const connectDB = require("./db/indext");
 const Product = require("./productModel");
-
+const cors = require('cors')
 require("dotenv").config();
 const app = express();
 
